@@ -5,13 +5,12 @@ class Lib_Application {
 	private $dispatcher;
 	private $container;
 
-	// autoloader variables
-	private $alLibPrefix;
-	private $alLibLen;
+	private $autoLoaderLibPrefix;
+	private $autoLoaderLibLength;
 
 	public function __construct() {
-		$this->alLibPrefix = ucfirst(strtolower(LIBDIR)) . '_';
-		$this->alLibLen = strlen($this->alLibPrefix);
+		$this->autoLoaderLibPrefix = ucfirst(strtolower(LIBDIR)) . '_';
+		$this->autoLoaderLibLength = strlen($this->autoLoaderLibPrefix);
 		spl_autoload_register(array($this, 'autoload'));
 	}
 
@@ -50,7 +49,8 @@ class Lib_Application {
 	}
 
 	private function _libraryClass($class) {
-		return (substr($class, 0, $this->alLibLen) == $this->alLibPrefix);
+		$classPrefix = substr($class, 0, $this->autoLoaderLibLength);
+		return ($classPrefix == $this->autoLoaderLibPrefix);
 	}
 
 	public function onError($num, $msg, $file, $line) {

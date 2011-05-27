@@ -1,16 +1,20 @@
 <?php
 
+/**
+ * Bootstrap file to kick start your web application
+ * @author Greg Knapp https://github.com/gknapp
+ */
+
 error_reporting(E_ALL | E_STRICT);
 
 define('DS', DIRECTORY_SEPARATOR);
+define('PS', PATH_SEPARATOR);
 define('BASEDIR', dirname(getcwd()) . DS);
 define('VENDOR',  BASEDIR . 'vendor');
 define('APPDIR', 'app');
 define('LIBDIR', 'lib');
 
-set_include_path(
-	get_include_path() . PATH_SEPARATOR . BASEDIR . PATH_SEPARATOR . VENDOR
-);
+set_include_path(get_include_path() . PS . BASEDIR . PS . VENDOR);
 require LIBDIR . DS . 'application.php';
 
 $zendLoader = function($class) {
@@ -36,13 +40,15 @@ $webApp->setDispatcher(new Lib_Dispatcher);
 
 // assign application dependencies
 $container = new Lib_Container;
-$container->dsn = 'sqlite:' . BASEDIR . 'data/wedding.db';
+/*
+$container->dsn = 'sqlite:' . BASEDIR . 'data/my.db';
 $container->dbh = function($c) {
 	return new PDO($c->dsn);
 };
 $container->database = function ($c) {
 	return new Lib_Sqlite3($c->dbh);
 };
+*/
 $container->request = new Lib_Request;
 $container->session = function($c) {
 	return function($namespace) {

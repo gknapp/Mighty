@@ -2,29 +2,29 @@
 
 class Controller_Error extends Lib_Controller {
 
+	public function preDispatch() {
+		parent :: preDispatch();
+		header("HTTP/1.1 500 Internal Server Error");
+	}
+
 	public function index() {
-		header("HTTP/1.1 404 Not Found");
-		$this->_layout->setLayout('error');
+		$this->view->error = "<pre>" . print_r(debug_backtrace(), true) . "</pre>";
 		$this->view->render('error' . DS . 'index.phtml');
-		/*
-		ob_start();
-		debug_print_backtrace();
-		$trace = ob_get_clean();
-		echo "<pre>" . nl2br($trace) . "</pre>";
-		*/
 	}
 
 	public function error($num, $msg, $file, $line) {
-		header("HTTP/1.1 500 Internal Server Error");
-		echo sprintf("<p>%s in %s on line %s</p>", $msg, $file, $line);
+		$this->view->error = sprintf(
+			"<p>%s in %s on line %s</p>", $msg, $file, $line
+		);
+		$this->view->render('error' . DS . 'index.phtml');
 	}
 
 	public function exception($e) {
-		header("HTTP/1.1 500 Internal Server Error");
-		echo sprintf(
+		$this->view->error = sprintf(
 			"<p>Exception:<br/>%s<br/>in %s on line %s</p>",
 			$e->getMessage(), $e->getFile(), $e->getLine()
 		);
+		$this->view->render('error' . DS . 'index.phtml');
 	}
 
 }
