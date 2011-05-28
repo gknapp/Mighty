@@ -10,10 +10,21 @@ class Lib_View extends Zend_View {
 
 	public function render($file = null) {
 		if (empty($file)) {
-			$request = new Lib_Request;
-			$file = $request->getControllerName() . DS . 'index.phtml';
+			$file = $this->_getFromActionDir($this->_getDefaultView());
 		}
 		return $this->buffer = parent::render($file);
+	}
+
+	protected function _getDefaultView() {
+		return 'index.phtml';
+	}
+
+	protected function _getFromActionDir($file) {
+		$subdir = $this->request->getControllerName();
+		if (empty($subdir)) {
+			$subdir = Lib_Dispatcher::DEFAULT_CONTROLLER;
+		}
+		return $subdir . DS . $file;
 	}
 
 }

@@ -33,13 +33,14 @@ class Lib_Controller {
 		$viewBase = BASEDIR . APPDIR . DS . 'view' . DS;
 		$this->_layout = new Zend_Layout(array(
 			'layout' => 'default',
-			'layoutPath' => $viewBase . DS . 'layout'
+			'layoutPath' => $viewBase . 'layout'
 		));
 		$this->view = new Lib_View(array(
 			'strictVars' => true
 		));
 		$this->view->setScriptPath($viewBase . 'scripts');
 		$this->view->addHelperPath($viewBase . 'helper', 'View_Helper');
+		$this->view->request = $this->getRequest();
 		$this->_layout->setView($this->view);
 	}
 
