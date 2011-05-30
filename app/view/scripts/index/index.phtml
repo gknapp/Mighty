@@ -1,9 +1,16 @@
-<p style="text-align: center;">
-  <img src="/images/mighty.png" alt="Mighty Framework" style="border: 1px solid #666;" />
+<p class="center">
+  <img id="logo" src="/images/mighty.png" alt="Mighty Framework" />
 </p>
+<h3>Version <?php echo $this->mightyVersion(); ?></h3>
 <p>Zend Framework is great, that's why I've used parts of it in Mighty.
 However, Zend Framework is becoming increasingly heavy weight, and frankly
 turning into a framework only a J2EE coder could love.</p>
+
 <p>For smaller projects I created Mighty. Far simpler but still provides
 structure for you to build your web application.</p>
-<p><a href="https://github.com/gknapp">Mighty on github</a></p>
+
+<p>Mighty doesn't enforce use of an ORM or particular templating system. It
+does make use of a simple dependency injection container, which you are
+encouraged to use but you can drop it and go your own way.</p>
+
+<p><a href="https://github.com/gknapp/Mighty">Mighty on github</a></p>

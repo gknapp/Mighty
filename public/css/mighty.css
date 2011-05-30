@@ -1,0 +1,17 @@
+body {
+	font-family: Georgia, Serif;
+}
+
+p {
+	line-height: 1.6em;
+}
+
+.center {
+	text-align: center;
+}
+
+#logo {
+	border: 1px solid #333;
+	-moz-box-shadow:3px 3px 5px #777;
+	-webkit-box-shadow:3px 3px 5px #777;
+}

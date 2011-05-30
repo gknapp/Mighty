@@ -55,4 +55,5 @@ $container->session = function($c) {
 		return new Zend_Session_Namespace($namespace);
 	};
 };
+$container->mightyVersion = '0.2';
 $webApp->run($container);
