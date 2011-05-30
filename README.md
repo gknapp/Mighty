@@ -24,4 +24,4 @@ Zend Layout, View and Session *
 [3]: http://framework.zend.com/manual/en/zend.layout.html
 [4]: http://framework.zend.com/manual/en/zend.view.html
 [5]: http://framework.zend.com/manual/en/zend.session.html
-[logo]: blob/master/public/images/mighty.png?raw=true "Might Framework"
+[logo]: Mighty/blob/master/public/images/mighty.png?raw=true "Might Framework"
