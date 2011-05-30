@@ -1,0 +1,54 @@
+# Created 2011-05-30 by Greg Knapp
+# Supplied with Mighty (https://github.com/gknapp/Mighty)
+#
+# Example nginx virtual host configuration, please adjust host 
+# and paths accordingly. For use with PHP FPM to run Mighty.
+
+server {
+	listen		80;
+	server_name	mighty.local;
+	root		/var/www/mighty/public;
+	access_log	/var/log/nginx/mighty.access.log;
+	error_log	/var/log/nginx/mighty.error.log;
+
+	location / {
+		index	index.php;
+
+		if (-f $request_filename) {
+			break;
+		}
+
+		if (!-e $request_filename) {
+			rewrite . /index.php last;
+		}
+	}
+
+	location ~* ^.+.(jpg|jpeg|gif|css|png|js|ico|xml)$ {
+		root		/var/www/mighty/public;
+		access_log	off;
+		expires		30d;
+	}
+
+	location ~ ^.+\.php {
+		fastcgi_split_path_info ^(.+\.php)(.*)$;
+		fastcgi_pass	backend;
+		fastcgi_index	index.php;
+		fastcgi_param	SCRIPT_FILENAME	/var/www/mighty/public$fastcgi_script_name;
+		include		fastcgi_params;
+		fastcgi_param	QUERY_STRING	$query_string;
+		fastcgi_param	REQUEST_METHOD	$request_method;
+		fastcgi_param	CONTENT_TYPE	$content_type;
+		fastcgi_param	CONTENT_LENGTH	$content_length;
+		fastcgi_intercept_errors	on;
+		fastcgi_ignore_client_abort	on;
+		fastcgi_read_timeout		180;
+	}
+
+	location ~ /\.ht {
+		deny all;
+	}
+}
+
+upstream backend {
+	server 127.0.0.1:9000;
+}
