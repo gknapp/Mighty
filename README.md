@@ -1,6 +1,4 @@
-<p style="margin: 0 auto; text-align: center;">
-  <img src="Mighty/blob/master/public/images/mighty.png?raw=true" alt="mighty framework" />
-</p>
+![Mighty Framework][logo]
 
 [Zend Framework][1] is great, that's why I've used parts of it in Mighty.
 However, Zend Framework is becoming increasingly heavy weight, and frankly 
@@ -26,3 +24,4 @@ Requirements
 [3]: http://framework.zend.com/manual/en/zend.layout.html
 [4]: http://framework.zend.com/manual/en/zend.view.html
 [5]: http://framework.zend.com/manual/en/zend.session.html
+[logo]: Mighty/blob/master/public/images/mighty.png?raw=true
